@@ -1,0 +1,7 @@
+{
+  "name": "churchApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
