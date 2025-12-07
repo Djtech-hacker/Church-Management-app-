@@ -1,0 +1,235 @@
+/* src/pages/PrayerRequests.css */
+
+.prayer-requests-container {
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+.prayer-header {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  background-size: 400% 400%;
+  padding: 60px 20px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+body.dark-mode .prayer-header {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+}
+
+.prayer-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.prayer-subtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.prayer-content {
+  padding: 20px;
+  margin-top: -40px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Add Request Button */
+.add-request-btn {
+  width: 100%;
+  padding: 18px 24px;
+  border-radius: 16px;
+  background: var(--gradient-1);
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+  margin-bottom: 24px;
+}
+
+.add-request-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+}
+
+.add-request-btn ion-icon {
+  font-size: 24px;
+}
+
+/* Requests List */
+.requests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.request-card {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.request-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.user-info {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gradient-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.request-user {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.request-time {
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.request-time ion-icon {
+  font-size: 14px;
+}
+
+.request-body {
+  margin-bottom: 16px;
+}
+
+.request-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.request-description {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.request-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.pray-btn {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 2px solid var(--border-color);
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.pray-btn ion-icon {
+  font-size: 20px;
+}
+
+.pray-btn:hover {
+  border-color: var(--primary-color);
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.pray-btn.active {
+  border-color: #ec4899;
+  background: rgba(236, 72, 153, 0.1);
+  color: #ec4899;
+}
+
+.pray-btn.active ion-icon {
+  color: #ec4899;
+  animation: heartbeat 0.5s ease;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.3);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Checkbox Label */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* Skeleton Loading */
+.skeleton-request {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .prayer-content {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

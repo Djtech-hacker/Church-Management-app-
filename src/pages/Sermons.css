@@ -1,0 +1,400 @@
+/* src/pages/Sermons.css */
+
+.sermons-container {
+  min-height: 100vh;
+  background: var(--background);
+  padding-bottom: 20px;
+}
+
+.sermons-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sermons-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.sermons-content {
+  padding: 20px;
+}
+
+/* Sermons List */
+.sermons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sermon-card {
+  background: var(--surface);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px var(--shadow);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sermon-thumbnail {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: var(--gradient-1);
+  overflow: hidden;
+}
+
+.sermon-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.sermon-card:hover .play-overlay {
+  opacity: 1;
+}
+
+.play-overlay ion-icon {
+  font-size: 36px;
+  color: white;
+}
+
+.sermon-type-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.sermon-info {
+  padding: 16px;
+}
+
+.sermon-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.sermon-speaker {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.sermon-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* Player Modal */
+.player-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.player-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.player-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  position: relative;
+  animation: slideInUp 0.4s ease;
+}
+
+.player-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.player-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.player-close-btn ion-icon {
+  font-size: 24px;
+  color: white;
+}
+
+/* Media Display */
+.media-display {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.video-player {
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  background: black;
+}
+
+.audio-artwork {
+  width: 100%;
+  height: 300px;
+  background: var(--gradient-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audio-artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artwork-placeholder {
+  font-size: 100px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Player Info */
+.player-info {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.player-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.player-speaker {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Progress Section */
+.progress-section {
+  margin-bottom: 32px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--primary-color);
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Player Controls */
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.control-btn:hover {
+  transform: scale(1.1);
+}
+
+.skip-time {
+  position: absolute;
+  bottom: -20px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.play-pause-btn {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+}
+
+.play-pause-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+}
+
+.play-pause-btn ion-icon {
+  font-size: 48px;
+  color: white;
+}
+
+/* Additional Controls */
+.additional-controls {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.icon-btn ion-icon {
+  font-size: 24px;
+  color: white;
+}
+
+/* Skeleton Loading */
+.skeleton-sermon {
+  background: var(--surface);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.skeleton-sermon .skeleton-avatar {
+  width: 100%;
+  height: 200px;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .sermons-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .sermons-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .player-controls {
+    gap: 24px;
+  }
+
+  .play-pause-btn {
+    width: 64px;
+    height: 64px;
+  }
+
+  .play-pause-btn ion-icon {
+    font-size: 36px;
+  }
+}

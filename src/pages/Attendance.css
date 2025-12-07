@@ -1,0 +1,345 @@
+/* src/pages/Attendance.css */
+
+.attendance-container {
+  min-height: 100vh;
+  background: var(--background);
+  padding: 20px;
+}
+
+.attendance-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.attendance-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Check-In Container */
+.check-in-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.check-in-card {
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+.check-in-icon-wrapper {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--gradient-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+  animation: float 3s ease-in-out infinite;
+}
+
+.check-in-icon {
+  font-size: 56px;
+  color: white;
+}
+
+.check-in-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.check-in-subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+
+/* Check-In Button */
+.check-in-button {
+  width: 100%;
+  padding: 18px 32px;
+  border-radius: 16px;
+  background: var(--gradient-1);
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.check-in-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+}
+
+.check-in-button:active {
+  transform: translateY(0);
+}
+
+.check-in-button ion-icon {
+  font-size: 28px;
+}
+
+.check-in-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Already Checked In */
+.already-checked-in {
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 2px solid rgba(16, 185, 129, 0.2);
+  text-align: center;
+}
+
+.checked-icon {
+  font-size: 48px;
+  color: var(--success-color);
+  margin-bottom: 12px;
+}
+
+.checked-text {
+  font-size: 16px;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.checked-text strong {
+  color: var(--success-color);
+}
+
+/* Service Info */
+.service-info {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+}
+
+.service-info-title {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.service-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.service-time {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Success Container */
+.success-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.success-animation {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.success-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--gradient-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  animation: scaleIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.success-icon {
+  font-size: 64px;
+  color: white;
+  animation: bounce 0.8s ease;
+}
+
+.success-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid var(--primary-color);
+  opacity: 0;
+  animation: ripple 2s ease-out infinite;
+}
+
+.success-ripple.delay-1 {
+  animation-delay: 0.5s;
+}
+
+.success-ripple.delay-2 {
+  animation-delay: 1s;
+}
+
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+.success-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.success-message {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+
+.success-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  background: var(--surface);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+.detail-item ion-icon {
+  font-size: 24px;
+  color: var(--primary-color);
+}
+
+/* Recent Attendance */
+.recent-attendance {
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.attendance-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.attendance-record {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: var(--background);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.attendance-record:hover {
+  transform: translateX(4px);
+}
+
+.record-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--success-color);
+  flex-shrink: 0;
+}
+
+.record-details {
+  flex: 1;
+}
+
+.record-service {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.record-date {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.record-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.record-time ion-icon {
+  font-size: 16px;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .attendance-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,214 @@
+/* src/pages/Testimonies.css */
+
+.testimonies-container {
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+.testimonies-header {
+  background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+  background-size: 400% 400%;
+  padding: 60px 20px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+body.dark-mode .testimonies-header {
+  background: linear-gradient(135deg, #db2777 0%, #be185d 100%);
+}
+
+.testimonies-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.testimonies-subtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.testimonies-content {
+  padding: 20px;
+  margin-top: -40px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Add Testimony Button */
+.add-testimony-btn {
+  width: 100%;
+  padding: 18px 24px;
+  border-radius: 16px;
+  background: var(--gradient-2);
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(236, 72, 153, 0.4);
+  margin-bottom: 24px;
+}
+
+.add-testimony-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
+}
+
+.add-testimony-btn ion-icon {
+  font-size: 24px;
+}
+
+/* Testimonies List */
+.testimonies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.testimony-card {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px var(--shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.testimony-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gradient-2);
+}
+
+.testimony-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.user-info {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.testimony-user {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.testimony-time {
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.testimony-time ion-icon {
+  font-size: 14px;
+}
+
+.category-badge {
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.testimony-body {
+  margin-bottom: 16px;
+}
+
+.testimony-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.testimony-text {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.testimony-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.heart-icon {
+  font-size: 20px;
+  color: #ec4899;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.glory-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Submission Note */
+.submission-note {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-align: center;
+  font-style: italic;
+}
+
+/* Skeleton Loading */
+.skeleton-testimony {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .testimonies-content {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
