@@ -1,4 +1,4 @@
-// src/pages/Home.jsx
+// src/pages/Home.jsx - DEBUG VERSION
 import { useState, useEffect } from 'react';
 import { IonContent, IonPage, IonIcon, IonRefresher, IonRefresherContent } from '@ionic/react';
 import {
@@ -30,11 +30,16 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [notificationCount, setNotificationCount] = useState(0);
 
+
+
+  // Check if user is admin
+  const isAdmin = userProfile?.role === 'admin' || userProfile?.role === 'superadmin';
+
   const quickActions = [
     {
       icon: checkmarkCircle,
       label: 'Attendance',
-      path: '/attendance',
+      path: isAdmin ? '/admin/attendance' : '/attendance',
       color: '#10b981',
       gradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
     },
@@ -108,12 +113,9 @@ const Home = () => {
         ...doc.data()
       }));
       
-      // Filter only future programs
       const upcomingPrograms = programs.filter(p => p.date >= today);
       setUpcomingPrograms(upcomingPrograms);
 
-      // Only show notification badge if there are NEW unread items
-      // For now, we'll only show if there are high priority announcements
       const highPriorityCount = announcements.filter(a => a.priority === 'high').length;
       setNotificationCount(highPriorityCount);
     } catch (error) {
@@ -165,7 +167,6 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Wave Effect */}
             <div className="wave-container">
               <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -177,7 +178,6 @@ const Home = () => {
           </div>
 
           <div className="home-content">
-            {/* Quick Actions */}
             <section className="section animate-fade-in-up">
               <h3 className="section-title">Quick Actions</h3>
               <div className="quick-actions-grid">
@@ -199,7 +199,6 @@ const Home = () => {
               </div>
             </section>
 
-            {/* Recent Announcements */}
             <section className="section animate-fade-in-up">
               <div className="section-header">
                 <h3 className="section-title">Recent Announcements</h3>
@@ -245,7 +244,6 @@ const Home = () => {
               )}
             </section>
 
-            {/* Upcoming Programs */}
             <section className="section animate-fade-in-up">
               <div className="section-header">
                 <h3 className="section-title">Upcoming Programs</h3>

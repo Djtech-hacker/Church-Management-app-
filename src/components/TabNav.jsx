@@ -1,4 +1,4 @@
-// src/components/TabNav.jsx
+// src/components/TabNav.jsx - FIXED VERSION
 import { IonIcon } from '@ionic/react';
 import {
   homeOutline,
@@ -44,27 +44,33 @@ const TabNav = () => {
     }
   ];
 
-  const isActive = (path) => location.pathname === path;
+  // ✅ FIXED: Properly check if current path matches tab path
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
 
   return (
     <div className="tab-nav">
       <div className="tab-nav-container">
-        {tabs.map((tab, index) => (
-          <button
-            key={index}
-            className={`tab-button ${isActive(tab.path) ? 'active' : ''}`}
-            onClick={() => history.push(tab.path)}
-          >
-            <div className="tab-icon-wrapper">
-              <IonIcon
-                icon={isActive(tab.path) ? tab.iconFilled : tab.iconOutline}
-                className="tab-icon"
-              />
-              {isActive(tab.path) && <div className="tab-indicator" />}
-            </div>
-            <span className="tab-label">{tab.label}</span>
-          </button>
-        ))}
+        {tabs.map((tab, index) => {
+          const active = isActive(tab.path);
+          return (
+            <button
+              key={index}
+              className={`tab-button ${active ? 'active' : ''}`}
+              onClick={() => history.push(tab.path)}
+            >
+              <div className="tab-icon-wrapper">
+                <IonIcon
+                  icon={active ? tab.iconFilled : tab.iconOutline}
+                  className="tab-icon"
+                />
+                {active && <div className="tab-indicator" />}
+              </div>
+              <span className="tab-label">{tab.label}</span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );

@@ -31,7 +31,6 @@ import './AttendanceSystem.css';
 const AttendanceSystem = () => {
   const history = useHistory();
   const { userProfile } = useAuth();
-  
   const [activeTab, setActiveTab] = useState('check-in');
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -45,9 +44,10 @@ const AttendanceSystem = () => {
     type: 'Sunday Service'
   });
 
+  // ✓ Correctly placed inside component
   const isAdmin = userProfile?.role === 'admin';
 
-  // Debug log to check admin status
+  // Debug log
   useEffect(() => {
     console.log('=== ATTENDANCE DEBUG ===');
     console.log('User Profile:', userProfile);
@@ -220,13 +220,7 @@ const AttendanceSystem = () => {
               </button>
               <h1 className="page-title">Attendance</h1>
               {isAdmin && (
-                <button 
-                  className="btn btn-primary-small" 
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowCreateModal(true);
-                  }}
-                >
+                <button className="btn btn-primary-small" onClick={() => setShowCreateModal(true)}>
                   <IonIcon icon={addOutline} />
                 </button>
               )}
@@ -416,15 +410,22 @@ const AttendanceSystem = () => {
 
         {/* Create Event Modal (Admin) */}
         {showCreateModal && (
-          <div className="modal-backdrop" onClick={() => setShowCreateModal(false)}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div 
+            className="modal-backdrop" 
+            onMouseDown={(e) => {
+              if (e.target === e.currentTarget) {
+                setShowCreateModal(false);
+              }
+            }}
+          >
+            <div className="modal-content">
               <button className="modal-close" onClick={() => setShowCreateModal(false)}>
                 <IonIcon icon={closeOutline} />
               </button>
               
               <h2>Create Attendance Event</h2>
               
-              <div>
+              <form onSubmit={handleCreateEvent}>
                 <div className="form-group">
                   <label>Event Title *</label>
                   <input
@@ -433,6 +434,7 @@ const AttendanceSystem = () => {
                     placeholder="e.g., Sunday Service"
                     value={eventForm.title}
                     onChange={(e) => setEventForm({...eventForm, title: e.target.value})}
+                    required
                   />
                 </div>
 
@@ -458,34 +460,34 @@ const AttendanceSystem = () => {
                     className="form-input"
                     value={eventForm.date}
                     onChange={(e) => setEventForm({...eventForm, date: e.target.value})}
+                    required
                   />
                 </div>
 
                 <div className="modal-actions">
-                  <button 
-                    type="button" 
-                    className="btn btn-secondary" 
-                    onClick={() => setShowCreateModal(false)}
-                  >
+                  <button type="button" className="btn btn-secondary" onClick={() => setShowCreateModal(false)}>
                     Cancel
                   </button>
-                  <button 
-                    type="button" 
-                    className="btn btn-primary"
-                    onClick={(e) => handleCreateEvent(e)}
-                  >
+                  <button type="submit" className="btn btn-primary">
                     Create Event
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         )}
 
         {/* Check-In Modal */}
         {showCheckInModal && (
-          <div className="modal-backdrop" onClick={() => setShowCheckInModal(false)}>
-            <div className="modal-content check-in-modal" onClick={(e) => e.stopPropagation()}>
+          <div 
+            className="modal-backdrop" 
+            onMouseDown={(e) => {
+              if (e.target === e.currentTarget) {
+                setShowCheckInModal(false);
+              }
+            }}
+          >
+            <div className="modal-content check-in-modal">
               <button className="modal-close" onClick={() => setShowCheckInModal(false)}>
                 <IonIcon icon={closeOutline} />
               </button>

@@ -1,5 +1,6 @@
 // src/pages/admin/AdminAttendance.jsx
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { IonContent, IonPage, IonIcon } from '@ionic/react';
 import {
   arrowBackOutline,
@@ -101,7 +102,9 @@ const AdminAttendance = () => {
     return Math.floor(100000 + Math.random() * 900000).toString();
   };
 
-  const handleCreateEvent = async () => {
+  const handleCreateEvent = async (e) => {
+    if (e) e.preventDefault();
+    
     if (!eventForm.title || !eventForm.date) {
       alert('Please fill in all required fields');
       return;
@@ -412,65 +415,101 @@ const AdminAttendance = () => {
           </div>
         </div>
 
-        {/* Create Event Modal */}
-        {showCreateModal && (
-          <div className="modal-backdrop" onClick={() => setShowCreateModal(false)}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              <button className="modal-close" onClick={() => setShowCreateModal(false)}>
+        {/* Create Event Modal - Using Portal */}
+        {showCreateModal && createPortal(
+          <div 
+            className="modal-backdrop"
+            onClick={(e) => {
+              if (e.target.className === 'modal-backdrop') {
+                setShowCreateModal(false);
+              }
+            }}
+          >
+            <div 
+              className="modal-content"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                className="modal-close" 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowCreateModal(false);
+                }}
+              >
                 <IonIcon icon={closeCircleOutline} />
               </button>
               
               <h2>Create Event</h2>
               
-              <div className="form-group">
-                <label>Event Title *</label>
-                <input
-                  type="text"
-                  className="form-input"
-                  placeholder="e.g., Sunday Service"
-                  value={eventForm.title}
-                  onChange={(e) => setEventForm({ ...eventForm, title: e.target.value })}
-                />
-              </div>
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleCreateEvent(e);
+              }}>
+                <div className="form-group">
+                  <label>Event Title *</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    placeholder="e.g., Sunday Service"
+                    value={eventForm.title}
+                    onChange={(e) => setEventForm({ ...eventForm, title: e.target.value })}
+                    onClick={(e) => e.stopPropagation()}
+                    required
+                  />
+                </div>
 
-              <div className="form-group">
-                <label>Event Type</label>
-                <select
-                  className="form-input"
-                  value={eventForm.type}
-                  onChange={(e) => setEventForm({ ...eventForm, type: e.target.value })}
-                >
-                  <option>Sunday Service</option>
-                  <option>Bible Study</option>
-                  <option>Prayer Meeting</option>
-                  <option>Youth Service</option>
-                  <option>Special Event</option>
-                </select>
-              </div>
+                <div className="form-group">
+                  <label>Event Type</label>
+                  <select
+                    className="form-input"
+                    value={eventForm.type}
+                    onChange={(e) => setEventForm({ ...eventForm, type: e.target.value })}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <option>Sunday Service</option>
+                    <option>Bible Study</option>
+                    <option>Prayer Meeting</option>
+                    <option>Youth Service</option>
+                    <option>Special Event</option>
+                  </select>
+                </div>
 
-              <div className="form-group">
-                <label>Date & Time *</label>
-                <input
-                  type="datetime-local"
-                  className="form-input"
-                  value={eventForm.date}
-                  onChange={(e) => setEventForm({ ...eventForm, date: e.target.value })}
-                />
-              </div>
+                <div className="form-group">
+                  <label>Date & Time *</label>
+                  <input
+                    type="datetime-local"
+                    className="form-input"
+                    value={eventForm.date}
+                    onChange={(e) => setEventForm({ ...eventForm, date: e.target.value })}
+                    onClick={(e) => e.stopPropagation()}
+                    required
+                  />
+                </div>
 
-              <div className="modal-actions">
-                <button 
-                  className="btn btn-secondary" 
-                  onClick={() => setShowCreateModal(false)}
-                >
-                  Cancel
-                </button>
-                <button className="btn btn-primary" onClick={handleCreateEvent}>
-                  Create Event
-                </button>
-              </div>
+                <div className="modal-actions">
+                  <button 
+                    type="button"
+                    className="btn btn-secondary" 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowCreateModal(false);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    type="submit" 
+                    className="btn btn-primary"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Create Event
+                  </button>
+                </div>
+              </form>
             </div>
-          </div>
+          </div>,
+          document.body
         )}
       </IonContent>
     </IonPage>

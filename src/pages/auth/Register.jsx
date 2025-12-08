@@ -90,24 +90,59 @@ const Register = () => {
     setError('');
     setLoading(true);
 
+    console.log('🚀 Starting registration process...');
+
+    // Failsafe timeout - if stuck for more than 10 seconds, force redirect
+    const failsafeTimeout = setTimeout(() => {
+      console.log('⚠️ Registration taking too long, forcing redirect...');
+      setLoading(false);
+      history.replace('/home');
+    }, 10000);
+
     try {
-      await register({
+      const userData = {
         fullName: formData.fullName,
         email: formData.email,
         phone: formData.phone,
         department: formData.department,
         password: formData.password
-      });
-      history.push('/home');
+      };
+
+      console.log('📝 Registering user:', { ...userData, password: '***' });
+      
+      const user = await register(userData);
+      
+      console.log('✅ Registration successful! User:', user?.uid);
+      console.log('🔄 Redirecting to home...');
+      
+      // Clear the failsafe timeout
+      clearTimeout(failsafeTimeout);
+      
+      // Force immediate redirect
+      setLoading(false);
+      window.location.href = '/home';
+      
     } catch (err) {
+      console.error('❌ Registration error:', err);
+      console.error('Error code:', err.code);
+      console.error('Error message:', err.message);
+      
+      // Clear the failsafe timeout
+      clearTimeout(failsafeTimeout);
+      
+      setLoading(false); // Important: Stop loading on error
+      
       if (err.code === 'auth/email-already-in-use') {
-        setError('Email address is already in use');
+        setError('Email address is already in use. Please sign in instead.');
+      } else if (err.code === 'auth/weak-password') {
+        setError('Password is too weak. Please use a stronger password.');
+      } else if (err.code === 'auth/invalid-email') {
+        setError('Invalid email address');
+      } else if (err.message) {
+        setError(err.message);
       } else {
         setError('Failed to create account. Please try again.');
       }
-      console.error(err);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -119,6 +154,7 @@ const Register = () => {
           <button 
             className="back-button"
             onClick={() => history.push('/login')}
+            disabled={loading}
           >
             <IonIcon icon={arrowBackOutline} />
           </button>
@@ -227,6 +263,7 @@ const Register = () => {
                   type="button"
                   className="password-toggle"
                   onClick={() => setShowPassword(!showPassword)}
+                  disabled={loading}
                 >
                   <IonIcon icon={showPassword ? eyeOffOutline : eyeOutline} />
                 </button>
@@ -250,6 +287,7 @@ const Register = () => {
                   type="button"
                   className="password-toggle"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  disabled={loading}
                 >
                   <IonIcon icon={showConfirmPassword ? eyeOffOutline : eyeOutline} />
                 </button>
@@ -262,7 +300,10 @@ const Register = () => {
               disabled={loading}
             >
               {loading ? (
-                <div className="spinner"></div>
+                <>
+                  <div className="spinner"></div>
+                  <span style={{ marginLeft: '10px' }}>Creating account...</span>
+                </>
               ) : (
                 'Create Account'
               )}
@@ -275,6 +316,7 @@ const Register = () => {
                   type="button"
                   className="link-button"
                   onClick={() => history.push('/login')}
+                  disabled={loading}
                 >
                   Sign In
                 </button>
